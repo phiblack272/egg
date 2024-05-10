@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+  --flowerColor:tomato;
+  --egg:hsl(50deg,50%, 75%);
+  --eggLine:hsl(90deg,50%, 50%);
+  --eggLines:hsl(128deg,50%, 50%);
+  --eggR: rotate(15deg);
+}
+
+body { 
+  overflow:hidden;
+  background:radial-gradient(circle at 100% 0%, gold, transparent 250px), linear-gradient(to top, saddleBrown, Chocolate 25px, dodgerblue 25px, lightblue);
+  background-size:100vw 100vh;
+}
+
+p {
+  font-family:monospace;
+  color:white;
+  position:absolute;
+  bottom: -8px;
+  z-index:-1;
+  opacity:.5;
+}
+.plant {
+  width:10px;
+  height:200px;
+  background:linear-gradient(to top, SeaGreen, lightgreen);
+  position:absolute;
+  bottom:25px;
+  left:0;
+  transform-origin:bottom center;
+  animation:grow 5s linear forwards, sway 5s linear infinite;
+  border-radius:50% 50% 0 0;
+  z-index:-1;
+  transition-timing-function: linear;
+  transition:2.5s;
+}
+@keyframes grow {
+  0% { height:0px; }
+}
+@keyframes sway {
+  25% { transform:skewX(2deg); }
+  75% { transform:skewX(-2deg); }
+}
+
+.plant:before {
+  width:0px;
+  height:0px;  
+  position:absolute;
+  bottom:10%; left:0px;
+  background:linear-gradient(to top left, SeaGreen, lightgreen);
+  content:'';
+  border-radius:0 30px 0 30px;
+  transform-origin:bottom right;
+  animation:springLeft 2s linear 1.5s forwards;
+}
+@keyframes springLeft {
+  100% { width:40px; height:40px; left:-40px; }
+}
+.plant:after {
+  width:0px;
+  height:0px;  
+  position:absolute;
+  bottom:5%; left: 10px;
+  background:linear-gradient(to top right, SeaGreen, lightgreen);
+  content:'';
+  border-radius:30px 0 30px 0;
+  animation:springRight 2s linear .5s forwards;
+}
+@keyframes springRight {
+  100% { width:40px; height:40px; left:10px; }
+}
+
+.plant div {
+  width:0px;
+  height:0px;
+  background:var(--flowerColor);
+  position:absolute;
+  left:0;
+  top:5px;
+  transform:translate(calc(-50% + 5px), -40%);
+  transform-origin:center center;
+  animation:flower 4s linear 2.5s forwards;
+}
+@keyframes flower {
+  100% { width:125px; height:125px; }
+}
+.plant div:before {
+  content:'';
+  width:100%;
+  height:100%;
+  background:inherit;
+  position:absolute;
+  top:0;
+  left:0;
+  transform:rotate(45deg);
+  border-radius:inherit;
+}
+.plant div:after {
+  content:'';
+  width:60%;
+  height:60%;
+  background:inherit;
+  background-size:4px 4px;
+  position:absolute;
+  top:20%;
+  left:20%;
+  border-radius:50%;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.25), 0 0 30px rgba(0,0,0,.5);
+}
+
+.rabbitBox {
+  position:absolute;
+  bottom:25px;
+/*   outline:1px solid red; */
+  width:50px;
+  height:50px;
+  animation:rabbit 15s linear infinite;
+}
+.rabbitBox:before {
+  content:'';
+  width:150%;
+  height:10px;
+  border-radius:50%;
+  background:rgba(0,0,0,.25);
+  filter:blur(2px);
+  position:absolute;
+  bottom:-12px;
+  left:0;
+}
+.rabbit {
+  width:50px;
+  height:50px;
+  background:white;
+  border-radius:75px 25px 75px 10px;
+  position:absolute;
+  animation:hop 2s linear infinite;
+}
+.rabbit:before {
+  width:35px;
+  height:15px;
+  background:white;
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:10px;
+  border-radius:15px;
+  transform-origin:top left;
+  animation:backfoot 2s linear infinite;
+}
+.rabbit:after {
+  width:15px;
+  height:35px;
+  background:white;
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:30px;
+  transform-origin:top left;
+  transform:rotate(-10deg);
+  border-radius:15px;
+  animation:frontfoot 2s linear infinite;
+}
+.head {
+  width:30px;
+  height:30px;
+  background:radial-gradient(circle at 10px 10px, black 2px, white 2px);
+  border-radius:25px 50px 25px 25px;
+  position:absolute;
+  top:-25px;
+  left:30px;
+}
+.head:before {
+  content:'';
+  width:15px;
+  height:30px;
+  background:white;
+  position:absolute;
+  border-radius:0 30px 0 30px;
+  left:-10px;
+  top:-10px;
+  transform:rotate(-45deg);
+  z-index:-1;
+}
+.head:after {
+  content:'';
+  width:15px;
+  height:30px;
+  background:white;
+  position:absolute;
+  border-radius:0 30px 0 30px;
+  left:-5px;
+  top:-15px;
+  transform:rotate(-30deg);
+  z-index:-1;
+}
+
+@keyframes rabbit {
+  0% { left:-100px; transform:scaleX(1); }
+  50% { left:100%; transform:scaleX(1); }
+  51% { left:100%; transform:scaleX(-1); }
+  100% { left:-100px; transform:scaleX(-1); }
+}
+@keyframes hop {
+  40% { transform:rotate(45deg) translate(0px, -20px) }
+  80% { transform:rotate(65deg) translate(0px, -10px) }
+  100% { transform:rotate(0deg) translate(0px, 0px) }
+}
+@keyframes frontfoot {
+  50% { transform:rotate(-90deg) }
+}
+@keyframes backfoot {
+  50% { transform:rotate(90deg) }
+}
+
+
+.egg {
+  width:30px;
+  height:45px;
+  border-radius:50%/60% 60% 40% 40%;
+  background:var(--egg);
+  overflow:hidden;
+  position:absolute;
+  z-index:2;
+  animation:egg 1.5s linear forwards;
+}
+.egg:before {
+  width:45px;
+  height:5px;
+  background:var(--eggLine);
+  box-shadow:0 0 0 3px var(--eggLines);
+  transform:var(--eggR);
+  content:'';
+  position:absolute;
+  left:-7.5px;
+  top:50%;
+}
+
+@keyframes egg {
+  75% { opacity:1; }
+  100% { transform:translateY(100%); opacity:0; }
+}
+
+.cloud {
+  width:100px;
+  height:100px;
+  background:white;
+  border-radius:50% 50% 0% 0%;
+  box-shadow:inset -5px -5px 5px rgba(0,0,0,.15);
+  position:absolute;
+  left:10%;
+  top:5%;
+  opacity:.75;
+  z-index:-1;
+}
+.cloud:before {
+   content:'';
+  width:50px;
+  height:50px;
+  background:white;
+  position:absolute;
+  top:50px;
+  left:-40px;
+  border-radius:50% 50% 0% 50%;
+  box-shadow:inset 5px -5px 5px rgba(0,0,0,.15);
+}
+.cloud:after {
+  content:'';
+  width:75px;
+  height:75px;
+  background:white;
+  position:absolute;
+  top:25px;
+  left:90px;
+  border-radius:50% 50% 50% 0%;
+  box-shadow:inset -5px -5px 5px rgba(0,0,0,.15);
+}
+
+.cloud:nth-child(2) {
+  animation:cloud1 20s linear infinite;
+}
+@keyframes cloud1 {
+  25% { transform:translateX(-50%); }
+  75% { transform:translateX(50%); }
+}
+
+.cloud:nth-child(3) {
+  top:20%;
+  left:75%;
+/*   opacity:.35; */
+  animation:cloud2 20s linear infinite;
+}
+@keyframes cloud2 {
+  25% { transform:translateX(50%); }
+  75% { transform:translateX(-50%); }
+}
+
+.cloud:nth-child(4) {
+  top:40%;
+  left:40%;
+/*   opacity:.2; */
+  animation:cloud3 30s linear infinite;
+}
+@keyframes cloud3 {
+  25% { transform:translateX(50%) ; }
+  75% { transform:translateX(-50%) ; }
+}
+    </style>
+</head>
+<body>
+    <div class='rabbitBox'><div class='rabbit'><div class='head'></div></div></div>
+<div class='cloud'></div><div class='cloud'></div><div class='cloud'></div>
+    <script>
+        var p = "<div id='plant'><div></div></div>"
+var root = document.documentElement
+var bunny = document.querySelector('.rabbitBox')
+var eggs = 0
+function getColor() {
+  return 'hsl('+Math.floor(Math.random()*360)+'deg,75%,75%)'
+}
+
+function egg() {
+  eggs++
+  function buildFlower() {
+  var b = document.createElement('div')
+  b.className = 'plant'
+  var color = 'hsl('+Math.floor(Math.random()*360)+'deg,75%,50%)'
+  b.innerHTML = '<div style="background:'+color+'; transform:translate(calc(-50% + 5px), -40%) rotate('+Math.random()*45+'deg); border-radius:'+Math.random()*25+'%"></div>'
+  b.style.height = Math.floor(Math.random()*200) + 200 + 'px'
+  b.style.left = rr.left + 10 + 'px'
+  var n = Math.random()
+  b.style.zIndex = n < .75 ? -1 : 1;
+  b.style.bottom = n < .75 ? '' : '5px';
+
+    if(document.querySelectorAll('.plant').length < 25) {
+      document.body.appendChild(b)
+    }  
+    
+    document.querySelectorAll('.plant').forEach(function(elm){
+      elm.addEventListener('click', function pickFlower() {
+        elm.style.bottom = '125%'
+        elm.style.filter = 'sepia(1)'
+        setTimeout(function(){
+          elm.remove()
+        },3000)
+      })
+      
+      if(eggs >= 50) {
+        
+        elm.style.bottom = '125%'
+        elm.style.filter = 'sepia(1)'
+        setTimeout(function(){
+          elm.remove()
+          eggs = 0
+        },3000)
+      }
+    })
+  }
+  
+  var r = document.querySelector('.rabbitBox')
+  var rr = r.getBoundingClientRect()
+  var e = document.createElement('div')
+  e.className = 'egg'
+  e.style.left = rr.left + 'px'
+  e.style.top = rr.top + 'px'
+  root.style.setProperty('--egg', getColor())
+  root.style.setProperty('--eggLine', getColor())
+  root.style.setProperty('--eggLines', getColor())
+  root.style.setProperty('--eggR', 'rotate('+Math.random()*180+'deg)')
+  if(document.querySelectorAll('.plant').length < 25) {
+    document.body.appendChild(e)
+  }  
+  if(document.getElementsByClassName('egg').length > 5) {
+    document.getElementsByClassName('egg')[0].remove()
+  }
+  
+  buildFlower()
+}
+
+var eggs = setInterval(egg, 2600)
+
+window.addEventListener('keyup', function(e) {
+  if(e.keyCode == 32) {
+    egg()
+  }
+})
+    </script>
+</body>
+</html>
